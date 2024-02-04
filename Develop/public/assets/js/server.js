@@ -11,3 +11,8 @@ const app = express();
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
+
+// route to note.html file
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/notes.html'));
+});
