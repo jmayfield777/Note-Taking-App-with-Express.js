@@ -7,6 +7,9 @@ const { v4: uuidv4 } = require('uuid');
 // set port
 const PORT = 3001;
 
+// import fs
+const fs = require('fs');
+
 // assign instance of express to a variable
 const app = express();
 
