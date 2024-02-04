@@ -1,6 +1,9 @@
 // import express.js
 const express = require('express');
 
+// import uuid
+const { v4: uuidv4 } = require('uuid');
+
 // set port
 const PORT = 3001;
 
