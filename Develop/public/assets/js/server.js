@@ -91,3 +91,9 @@ const response = {
   res.status(500).json('Error in posting note');
 }
 });
+
+
+// connect PORT
+app.listen(PORT, () => {
+  console.log(`App listening at http://localhost:${PORT}`);
+});
