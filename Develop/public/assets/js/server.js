@@ -92,6 +92,31 @@ const response = {
 }
 });
 
+// delete route to /api/notes/:id
+app.delete('/api/notes/:id', (req, res) => {
+  // log request to delete note
+  console.info(`${req.method} request received to delete a note`);
+
+  // read existing notes from db.json
+  const notes = JSON.parse(fs.readFile('../../../db/db.json'));
+
+  // find the index of the note with given id
+  const noteIndex = notes.findIndex(note => note.id === req.params.id);
+
+  // if the note is found remove from array
+  if (noteIndex > -1) {
+    notes.splice(noteIndex, 1);
+
+    // write notes back to db.json
+    fs.writeFile('../../../db/db.json', JSON.stringify(notes));
+
+    res.json({ message: 'Note deleted successfully' });
+
+  } else {
+    res.status(404).json({ error: 'Note not found' });
+  }
+});
+
 
 // connect PORT
 app.listen(PORT, () => {
