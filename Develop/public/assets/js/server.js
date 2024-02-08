@@ -1,20 +1,16 @@
-// import express.js
+// import dependencies
 const express = require('express');
-
-// import uuid
 const { v4: uuidv4 } = require('uuid');
-
-// import db/db.json
 const notes = require('../../../db/db.json');
-
-// set port
 const PORT = 3001;
-
-// import fs
 const fs = require('fs');
-
-// assign instance of express to a variable
 const app = express();
+const path = require('path');
+
+// middleware
+app.use(express.static('public'));
+app.use(express.json());
+
 
 // get route to index.html file
 app.get('*', (req, res) => {
