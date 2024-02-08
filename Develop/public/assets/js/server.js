@@ -41,12 +41,15 @@ app.get('*', (req, res) => {
 
 // get route to /api/notes
 app.get('/api/notes', (req, res) => {
-  // parse json data
-  res.json(notes);
+  
+  fs.readFile('../../../db/db.json', (err, data) => {
+    if (err) throw err;
+    res.json(JSON.parse(data));
+  });
 
-  // Log our request to the terminal
-  console.info(`${req.method} request received to get notes`);
 });
+
+
 
 // post route to /api/notes
 app.post('/api/notes', (req, res) => {
@@ -67,7 +70,7 @@ const newNote =  {
 };
 
 // get existing notes
-fs.readFile('../../../db/db.json', 'utf8', (err, data) => {
+fs.readFile('../../../db/db.json', (err, data) => {
   if (err) {
     console.log(err);
   } else {
