@@ -1,7 +1,7 @@
 // import dependencies
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const notes = require('../../../db/db.json');
+const notes = require('../db/db.json');
 const PORT = 3001;
 const fs = require('fs');
 const app = express();
@@ -18,23 +18,23 @@ app.use(express.json());
 // get route to index.html file
 app.get('/', (req, res) => {
 
-  res.sendFile(path.join(__dirname, '../../../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 
 });
 
 // get route to notes.html file
 app.get('/notes', (req, res) => {
 
-  res.sendFile(path.join(__dirname, '../../../public/notes.html'));
+  res.sendFile(path.join(__dirname, '../public/notes.html'));
 
 });
 
 // wildcare route
 app.get('*', (req, res) => {
 
-  res.sendFile(path.join(__dirname, '../../../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 
-})
+});
 
 
 
@@ -42,7 +42,7 @@ app.get('*', (req, res) => {
 // get route to /api/notes
 app.get('/api/notes', (req, res) => {
   
-  fs.readFile('../../../db/db.json', (err, data) => {
+  fs.readFile('../db/db.json', (err, data) => {
     if (err) throw err;
     res.json(JSON.parse(data));
   });
@@ -70,7 +70,7 @@ const newNote =  {
 };
 
 // get existing notes
-fs.readFile('../../../db/db.json', (err, data) => {
+fs.readFile('../db/db.json', (err, data) => {
   if (err) {
     console.log(err);
   } else {
@@ -82,7 +82,7 @@ fs.readFile('../../../db/db.json', (err, data) => {
 
     // write updated notes back to db.json
     fs.writeFile(
-      '../../../db/db.json',
+      '../db/db.json',
       JSON.stringify(parsedNotes, null, 4),
       (writeErr) => 
         writeErr
@@ -110,7 +110,7 @@ app.delete('/api/notes/:id', (req, res) => {
   console.info(`${req.method} request received to delete a note`);
 
   // read existing notes from db.json
-  const notes = JSON.parse(fs.readFile('../../../db/db.json'));
+  const notes = JSON.parse(fs.readFile('../db/db.json'));
 
   // find the index of the note with given id
   const noteIndex = notes.findIndex(note => note.id === req.params.id);
@@ -120,7 +120,7 @@ app.delete('/api/notes/:id', (req, res) => {
     notes.splice(noteIndex, 1);
 
     // write notes back to db.json
-    fs.writeFile('../../../db/db.json', JSON.stringify(notes));
+    fs.writeFile('../db/db.json', JSON.stringify(notes));
 
     res.json({ message: 'Note deleted successfully' });
 
