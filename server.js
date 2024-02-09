@@ -1,7 +1,7 @@
 // import dependencies
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
-const notes = require('./db/db.json');
+const notes = require('./Develop/db/db.json');
 const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const app = express();
@@ -18,14 +18,14 @@ app.use(express.static('public'));
 // get route to index.html file
 app.get('/', (req, res) => {
 
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 
 });
 
 // get route to notes.html file
 app.get('/notes', (req, res) => {
 
-  res.sendFile(path.join(__dirname, './public/notes.html'));
+  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 
 });
 
@@ -35,7 +35,7 @@ app.get('/notes', (req, res) => {
 // get route to /api/notes
 app.get('/api/notes', (req, res) => {
   
-  fs.readFile('./db/db.json', (err, data) => {
+  fs.readFile('./Develop/db/db.json', (err, data) => {
     if (err) throw err;
     res.json(JSON.parse(data));
   });
@@ -63,7 +63,7 @@ const newNote =  {
 };
 
 // get existing notes
-fs.readFile('./db/db.json', (err, data) => {
+fs.readFile('./Develop/db/db.json', (err, data) => {
   if (err) {
     console.log(err);
   } else {
@@ -75,7 +75,7 @@ fs.readFile('./db/db.json', (err, data) => {
 
     // write updated notes back to db.json
     fs.writeFile(
-      './db/db.json',
+      './Develop/db/db.json',
       JSON.stringify(parsedNotes, null, 4),
       (writeErr) => 
         writeErr
@@ -102,7 +102,7 @@ app.delete('/api/notes/:id', (req, res) => {
   // log request to delete note
   console.info(`${req.method} request received to delete a note`);
 
-  fs.readFile('./db/db.json', (err, data) => {
+  fs.readFile('./Develop/db/db.json', (err, data) => {
     if (err) {
       console.log(err);
     } else {
@@ -115,7 +115,7 @@ app.delete('/api/notes/:id', (req, res) => {
         parsedNotes.splice(noteIndex, 1);
       }
 
-      fs.writeFile('./db/db.json',
+      fs.writeFile('./Develop/db/db.json',
         JSON.stringify(parsedNotes, null, 4),
         (writeErr) => 
           writeErr
@@ -133,7 +133,7 @@ app.delete('/api/notes/:id', (req, res) => {
 // wildcare route
 app.get('*', (req, res) => {
 
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 
 });
 
