@@ -9,10 +9,9 @@ const path = require('path');
 const { json } = require('body-parser');
 
 // middleware
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
-app.use(express.static('public'));
-
 
 
 // get route to index.html file
