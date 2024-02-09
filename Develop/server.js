@@ -6,12 +6,12 @@ const PORT = process.env.PORT || 3001;
 const fs = require('fs');
 const app = express();
 const path = require('path');
+const { json } = require('body-parser');
 
 // middleware
-app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
-
+app.use(express.static('public'));
 
 
 
@@ -26,13 +26,6 @@ app.get('/', (req, res) => {
 app.get('/notes', (req, res) => {
 
   res.sendFile(path.join(__dirname, './public/notes.html'));
-
-});
-
-// wildcare route
-app.get('*', (req, res) => {
-
-  res.sendFile(path.join(__dirname, './public/index.html'));
 
 });
 
@@ -109,27 +102,40 @@ app.delete('/api/notes/:id', (req, res) => {
   // log request to delete note
   console.info(`${req.method} request received to delete a note`);
 
-  // read existing notes from db.json
-  const notes = JSON.parse(fs.readFile('./db/db.json'));
+  fs.readFile('./db/db.json', (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // parse the data as a json object and remove the note with the given id
+      let parsedNotes = JSON.parse(data);
 
-  // find the index of the note with given id
-  const noteIndex = notes.findIndex(note => note.id === req.params.id);
+      const noteIndex = parsedNotes.findIndex(parsedNotes => parsedNotes.id === req.params.id);
 
-  // if the note is found remove from array
-  if (noteIndex > -1) {
-    notes.splice(noteIndex, 1);
+      if (noteIndex > -1) {
+        parsedNotes.splice(noteIndex, 1);
+      }
 
-    // write notes back to db.json
-    fs.writeFile('./db/db.json', JSON.stringify(notes));
+      fs.writeFile('./db/db.json',
+        JSON.stringify(parsedNotes, null, 4),
+        (writeErr) => 
+          writeErr
+            ? console.error(writeErr)
+            : console.info('Successfully deleted note!')
+        );
+    }
+  });
 
-    res.json({ message: 'Note deleted successfully' });
+  res.json('Successfully deleted note!');
 
-  } else {
-    res.status(404).json({ error: 'Note not found' });
-  }
 });
 
 
+// wildcare route
+app.get('*', (req, res) => {
+
+  res.sendFile(path.join(__dirname, './public/index.html'));
+
+});
 
 
 // connect PORT
