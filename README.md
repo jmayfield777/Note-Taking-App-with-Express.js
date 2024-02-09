@@ -2,11 +2,11 @@
 
 ## Description
 
-This project is a note taking application with Express.js. To start, the user must run the local server on their computer to use the note taking app. The user can then navigate to the specified port, 3001, to view the index.html file in the browser. Click the "Get Started" button to begin and you will be redirected to the notes.html page where you will be greeted with a section to enter a new note with title and body text. Once you click "Save Note" the new note will be pushed to the list on the left-hand side of the screen with the other notes. Each note has a trash icon button to delete the notes. This will delete the note from the webpage and from the "db.json" file.
+This project is a note taking application with Express.js. To start, the user must run the local server on their computer. The user can then navigate to http://localhost:3001, to view the application in the browser. Click the "Get Started" button to begin and you will be redirected to the notes.html page where you will be greeted with a section to enter a new note with title and body text. Once you click "Save Note" the new note will be pushed to the list on the left-hand side of the screen with the other notes. Each note has a trash icon button to delete the notes. This will delete the note from the webpage and from the "db.json" file.
 
-[Screenshot of note-taking-app page 1]()
+![Screenshot 1](<Screenshot 2024-02-08 at 6.51.39 PM-1.png>)
 
-[Screenshot of note-taking-app page 2]()
+![Screenshot 2](<Screenshot 2024-02-08 at 6.52.07 PM-1.png>)
 
 ## Table of Contents
 
@@ -28,7 +28,7 @@ To run this project, run the following command:
 npm init 
 ```
 
-(add "-y" to answer yes to all questions regarding the creation of the package.json), then run the following code to install the inquirer package to receive the questions to generate the README.md:
+(add "-y" to answer yes to all questions regarding the creation of the package.json), then run the following code to install any necessary dependencies:
 
 ```
 
@@ -43,7 +43,7 @@ node server.js
 
 ## Usage
 
-Clone this repo and save it locally to your computer. Open terminal, git bash, or whichever command line interface you are using and navigate to the directory holding the server.js file. 
+Clone this repo and save it locally to your computer. Open terminal, git bash, or whichever command line interface you are using and navigate to the directory holding the server.js file. Run the following command:
 
 ```
 node server.js
@@ -65,6 +65,7 @@ https://makeschool.org/mediabook/oa/tutorials/rotten-potatoes---movie-reviews-wi
 
 https://www.npmjs.com/package/uuid (help with generating random id's)
 
+Attended office hours before after class to get some help with the delete route.
 
 ## License
 
@@ -72,4 +73,4 @@ https://www.npmjs.com/package/uuid (help with generating random id's)
 
 ## Questions
 
-If you have any questions about this repo, please feel free to contact me at my email : josh.mayfield45@gmail.com and Github profile : https://github.com/jmayfield777
+If you have any questions about this application, please feel free to contact me at my email : josh.mayfield45@gmail.com and Github profile : https://github.com/jmayfield777
