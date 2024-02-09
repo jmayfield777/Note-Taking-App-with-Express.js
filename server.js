@@ -14,23 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded( { extended: true }));
 
 
-// get route to index.html file
-app.get('/', (req, res) => {
-
-  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
-
-});
-
-// get route to notes.html file
-app.get('/notes', (req, res) => {
-
-  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
-
-});
-
-
-
-
 // get route to /api/notes
 app.get('/api/notes', (req, res) => {
   
@@ -125,6 +108,21 @@ app.delete('/api/notes/:id', (req, res) => {
   });
 
   res.json('Successfully deleted note!');
+
+});
+
+
+// get route to index.html file
+app.get('/', (req, res) => {
+
+  res.sendFile(path.join(__dirname, './Develop/public/index.html'));
+
+});
+
+// get route to notes.html file
+app.get('/notes', (req, res) => {
+
+  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 
 });
 
